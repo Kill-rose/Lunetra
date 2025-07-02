@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="- Blog - ">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="apple-touch-icon-180x180.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="android-chrome-192x192.png" sizes="192x192">
+    <title>Blog</title>
+    <link rel="stylesheet" href="css/default.css">
+    <script src="js/blog.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
+</head>
+
+<body class="theme-floral">
+
+<div class="content-container">
+<div class="page show">
+
+<header style="width: 100%;">
+    <table border="0" class="file-header container-nb headers" style="font-size: 120%;">
+        <tr>
+            <td class="file-header-left header">
+                <img src="img/header-icon.png" alt="Menu" class="header-left-icon">
+            </td>
+            <td class="table-str header" id="header-title">- Blog -</td>
+        </tr>
+    </table>
+    <div class="header-image container headers">
+        <img src="img/header-image.png" alt="Lunetra">
+    </div>
+    <div class="header-adv container nonecont stripe-bg headers" style="text-align: center; color: #9e7a5b00; user-select: none; font-size: 200%;">
+        blog posts and thoughts.
+    </div>
+    <table border="0" class="header-tab-cover container-nb headers" style="border-bottom: none;">
+        <tr>
+            <td class="header-tab selected header" data-tab="all" style="border-bottom: none;">All</td>
+            <td class="header-tab header" data-tab="original" style="border-bottom: none;">Original</td>
+            <td class="header-tab header" data-tab="thoughts" style="border-bottom: none;">Thoughts</td>
+            <td class="header-tab header" data-tab="updates" style="border-bottom: none;">Updates</td>
+        </tr>
+    </table>
+</header>
+
+
+
+
+
+<!-- フォントサイズ変更 -->
+<div class="font-size-toggle" id="fontSizeToggle">A</div>
+<div class="font-size-menu" id="fontSizeMenu">
+    <h4>文字サイズ</h4>
+    <div class="font-size-options">
+        <div class="font-size-option" data-size="small">小</div>
+        <div class="font-size-option active" data-size="medium">中</div>
+        <div class="font-size-option" data-size="large">大</div>
+    </div>
+</div>
+
+<!-- 戻るボタン -->
+<div class="back-button" id="backButton">
+    <a href="index.html" class="back-icon"><img src="img/back.png" alt="戻る" class="back-icon" style="width:200%; height: 200%;"></a>
+</div>
+
+
+
+</div>
+</div>
+
+<script>
+// 戻るボタン管理クラス
+class BackButtonController {
+    constructor() {
+        this.backButton = document.getElementById('backButton');
+        // デフォルトの戻り先を設定
+        this.defaultReturnPath = 'index.html'; // または適切な相対パス
+        this.init();
+    }
+
+    init() {
+
+        // ページの状態に応じてボタンの表示/非表示を制御
+        this.updateButtonVisibility();
+        
+        // タブ切り替え時にボタンの表示状態を更新
+        this.observeTabChanges();
+    }
+
+    goBack() {
+        // 現在のページのパスを取得
+        const currentPath = window.location.pathname;
+        const returnPath = this.getReturnPath(currentPath);
+        
+        if (returnPath) {
+            // 相対パスで指定されたページに移動
+            window.location.href = returnPath;
+        } else {
+            // デフォルトの戻り先に移動
+            window.location.href = this.defaultReturnPath;
+        }
+    }
+
+    // 現在のパスに基づいて戻り先を決定
+    getReturnPath(currentPath) {
+        // パスのマッピングテーブル
+        const pathMappings = {
+            // 例: 詳細ページから一覧ページへ
+            '/detail.html': '../list.html',
+            '/detail/': '../list.html',
+            
+            // サブディレクトリから親ディレクトリへ
+            '/sub/page.html': '../index.html',
+            '/sub/': '../index.html',
+            
+            // 深い階層から戻る
+            '/category/sub/item.html': '../../category.html',
+            '/category/sub/': '../../category.html',
+            
+            // 特定のページから特定のページへ
+            '/about.html': './index.html',
+            '/contact.html': './index.html',
+            
+            // デフォルト: 一つ上の階層へ
+        };
+
+        // 完全一致をチェック
+        if (pathMappings[currentPath]) {
+            return pathMappings[currentPath];
+        }
+
+        // 部分一致をチェック（ディレクトリベース）
+        for (const [path, returnPath] of Object.entries(pathMappings)) {
+            if (currentPath.includes(path.replace('.html', ''))) {
+                return returnPath;
+            }
+        }
+
+        // 自動的に一つ上の階層を推測
+        return this.getParentPath(currentPath);
+    }
+
+    // 現在のパスから親ディレクトリのパスを生成
+    getParentPath(currentPath) {
+        const pathParts = currentPath.split('/').filter(part => part !== '');
+        
+        if (pathParts.length <= 1) {
+            // ルートレベルの場合
+            return './index.html';
+        }
+
+        // 最後の要素を除去して親パスを作成
+        pathParts.pop();
+        
+        if (pathParts.length === 0) {
+            return './index.html';
+        }
+
+        // 相対パスとして構築
+        const levels = window.location.pathname.split('/').filter(part => part !== '').length - 1;
+        const prefix = '../'.repeat(levels > 0 ? levels : 1);
+        
+        return `${prefix}${pathParts.join('/')}/index.html`;
+    }
+
+    // 特定のページへの戻り先を動的に設定
+    setReturnPath(targetPath) {
+        this.currentReturnPath = targetPath;
+    }
+
+    // data属性から戻り先を取得
+    getReturnPathFromAttribute() {
+        const backPath = this.backButton.getAttribute('data-back-path');
+        return backPath || null;
+    }
+
+    updateButtonVisibility() {
+        // 常時表示
+        this.showButton();
+    }
+
+    showButton() {
+        this.backButton.classList.add('show');
+    }
+
+    hideButton() {
+        this.backButton.classList.remove('show');
+    }
+
+    observeTabChanges() {
+        // タブの変更を監視（オプション）
+        // 必要に応じて特定のタブでボタンを非表示にする
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    // タブの表示状態が変わった時の処理
+                    this.updateButtonVisibility();
+                }
+            });
+        });
+
+        // 監視対象の要素を設定
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(content => {
+            observer.observe(content, { attributes: true });
+        });
+    }
+}
+
+// ページ読み込み後に戻るボタンを初期化
+document.addEventListener('DOMContentLoaded', () => {
+    // 既存のTabManagerとFontSizeControllerの初期化の後に追加
+    window.backButtonController = new BackButtonController();
+});
+</script>
+</body>
+</html>
