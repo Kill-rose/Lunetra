@@ -448,44 +448,6 @@ td.scr {
   user-select: none;
 }
 
-/* スマホ向けの調整 */
-@media screen and (max-width: 767px) {
-	body {
-		font-size: 14px;
-	}
-	
-	.page {
-		width: 95vw;
-	}
-	
-	.header-image {
-		height: 120px;
-	}
-	
-	.cont-double {
-		min-height: 150px;
-	}
-	
-	.cont-str,
-	.cont-img {
-		padding: 10px;
-	}
-	
-	.cont-maximg {
-		padding: 0px;
-	}
-
-	h3 {
-		font-size: 1.1em;
-	}
-	h4 {
-		font-size: 1em;
-	}
-	
-	p {
-		font-size: 0.9em;
-	}
-}
 
 /* タブレット向けの調整 */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
@@ -759,23 +721,7 @@ td.scr {
 	font-size: 125%;
 }
 
-/* スマホ対応 */
-@media screen and (max-width: 767px) {
-	.font-size-toggle {
-		width: 45px;
-		height: 45px;
-		font-size: 18px;
-		bottom: 15px;
-		right: 15px;
-	}
 
-	.font-size-menu {
-		bottom: 70px;
-		right: 15px;
-		min-width: 130px;
-		padding: 12px;
-	}
-}
 
 
 
@@ -1003,6 +949,67 @@ td.scr {
 
 /* スマホ対応 */
 @media screen and (max-width: 767px) {
+
+
+
+	.font-size-toggle {
+		width: 45px;
+		height: 45px;
+		font-size: 18px;
+		bottom: 15px;
+		right: 15px;
+	}
+
+	.font-size-menu {
+		bottom: 70px;
+		right: 15px;
+		min-width: 130px;
+		padding: 12px;
+	}
+
+
+	td.header {
+		border: 1px solid var(--color-accent);
+	}
+
+
+	.scratch-table {
+		border: 1px solid var(--color-border);
+	}
+
+	td.scr {
+		border: 1px solid var(--color-border);
+	}
+
+
+
+
+	.font-size-toggle {
+		border: 2px solid var(--color-border, #8b5e3c);
+	}
+
+	.font-size-menu {
+		border: 1px solid var(--color-accent, #AB6F55);
+	}
+
+
+	
+	.font-size-option {
+		border: 1px solid var(--color-border, #8b5e3c)
+	}
+
+	.modal-content {
+		border: 1px solid var(--color-accent);
+	}
+
+	.pagination button {
+		border: 1px solid var(--color-border);
+	}
+
+.back-button {
+    border: 1px solid var(--color-border, #8b5e3c);
+}
+
     .back-button {
         width: 45px;
         height: 45px;
@@ -1014,7 +1021,51 @@ td.scr {
         width: 20px;
         height: 20px;
     }
+
+	.container {
+		border: 1px solid var(--color-accent);
+	}
+
+
+
+
+	body {
+		font-size: 14px;
+	}
+	
+	.page {
+		width: 95vw;
+	}
+	
+	.header-image {
+		height: 120px;
+	}
+	
+	.cont-double {
+		min-height: 150px;
+	}
+	
+	.cont-str,
+	.cont-img {
+		padding: 10px;
+	}
+	
+	.cont-maximg {
+		padding: 0px;
+	}
+
+	h3 {
+		font-size: 1.1em;
+	}
+	h4 {
+		font-size: 1em;
+	}
+	
+	p {
+		font-size: 0.9em;
+	}
 }
+
 
 
 #headerImage {
