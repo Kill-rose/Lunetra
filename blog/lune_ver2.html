@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome!">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="../apple-touch-icon-180x180.png" sizes="180x180">
+	<link rel="icon" type="image/png" href="../android-chrome-192x192.png" sizes="192x192">
+    <title>Lunetra</title>
+    <link rel="stylesheet" href="../css/default.css">
+    <script src="../js/script.js" defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
+</head>
+
+
+<body class="theme-aquamint"> <!-- テーマ（色） -->
+
+<div class="content-container"> <!-- 上の余白 -->
+
+
+<div class="page show"> <!-- 左右の余白 -->
+
+<header style="width: 100%;">
+    <table border="0" class="file-header container-nb headers" style="font-size: 120%; "> <!-- 上の検索窓っぽい装飾 -->
+        <tr>
+            <td class="file-header-left header"> <!-- 左上の装飾アイコンの部分 -->
+                <img src="../img/header-icon.png" alt="Menu" class="header-left-icon"> <!-- 左上の装飾アイコンの画像 -->
+            </td>
+            <td class="table-str header" id="header-title">Welcome!</td> <!-- 右上の案内メッセージ　デフォルトがhomeなのでそうしておく -->
+        </tr>
+    </table>
+    <div class="header-image container headers"> <!-- ヘッダー画像の枠 -->
+        <img src="../img/header/home.png" alt="Lunetra" > <!-- ヘッダー画像 -->
+    </div>
+    <div class="header-adv container nonecont stripe-bg  headers" style="text-align: center; color: #9e7a5b00; user-select: none; font-size: 200%;"> <!-- ボーダー部分 -->
+        welcome to Lunetra. <!-- 隠しテキスト（意味無し） -->
+    </div>
+    <table border="0" class="header-tab-cover container-nb  headers" style="border-bottom: none;"> <!-- タブ部分 -->
+        <tr>
+        <td class="header-tab header" data-tab="blog" style="border-bottom: none;" onclick="location.href='../index.html#blog'">Top</td>
+        <td class="header-tab header selected" data-tab="home" style="border-bottom: none;">Lunetra Ver2</td>
+        </tr>
+    </table>         
+</header> <!-- ヘッダー終わり -->
+
+<!-- Home -->
+<div class="container" style=" border-top: none;">
+    <div class="cont-str-main" >   
+            <h1>Lunetra Ver2</h1>
+            <p>記念すべき１記事目。<br>
+                いろいろやってすっごい変わった。</p><br>
+            <h2>GitHubで公開</h2>
+            <p>忍者ツールズを使わせてもらってたんですが、GitHubに移行しました。<br>
+            広告なくて無料でVSCodeと連携できるってマジ？<br>
+            それはもう大変でしたが、かなり奮闘した結果無事にできた……！</p>
+            <a href="img/1.png" data-lightbox="blog1" data-title="頑張った" >
+            <img src="img/1.png" alt="" class="cont-maximg"style="margin-top: 1em; margin-bottom: 1em;">
+            </a>
+            <h2>いろんな機能をつけた</h2>
+            <p>頑張った。まあ見てもらえればわかる。<br>
+            このブログももちろんその一部。<br>
+            パソコンで記事とか文章書くのとっても面倒。<br>
+            楽しくないし…タイピング遅いし…<br>
+            スマホで書けるようにしたいというのが今後の夢。<br><br>
+            でもスマホでhtml編集してGoogleドライブと接続できるアプリなんて…<br><br>
+            アプリなんて…<br><br>
+            あ、ある……だと！？</p>
+            <h2>まとめ</h2>
+            <p>これからもゲームとか小説とかイラストとか追加していくつもりデス。<br>
+            頑張るぞ～</p>
+            <hr style="margin-top: 2em; margin-bottom: 2em; height: 1.5px;">
+            <p>作成：2025/7/2<br>
+            最終更新：2025/7/2</p><br>
+            <a href="../index.html#blog">ブログ一覧に戻る</a>
+    </div>
+
+
+
+
+</div> <!-- Home 閉じ -->
+
+
+
+
+<!-- フォントサイズ変更のhtml -->
+
+<div class="font-size-toggle" id="fontSizeToggle">
+    A
+</div>
+
+<div class="font-size-menu" id="fontSizeMenu">
+    <h4>文字サイズ</h4>
+    <div class="font-size-options">
+        <div class="font-size-option" data-size="small">小</div>
+        <div class="font-size-option active" data-size="medium">中</div>
+        <div class="font-size-option" data-size="large">大</div>
+    </div>
+</div>
+
+<!-- フォントサイズ変更のhtml終わり -->
+
+
+
+</div> <!-- page show 閉じ -->
+
+<script>
+// フォントサイズ変更機能
+class FontSizeController {
+    constructor() {
+        this.toggle = document.getElementById('fontSizeToggle');
+        this.menu = document.getElementById('fontSizeMenu');
+        this.options = document.querySelectorAll('.font-size-option');
+        this.currentSize = 'medium';
+        
+        this.init();
+    }
+        
+
+    init() {
+        // トグルボタンのクリックイベント
+        this.toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleMenu();
+        });
+
+        // メニュー外クリックで閉じる
+        document.addEventListener('click', (e) => {
+            if (!this.menu.contains(e.target) && !this.toggle.contains(e.target)) {
+                this.closeMenu();
+            }
+        });
+
+        // フォントサイズオプションのクリックイベント
+        this.options.forEach(option => {
+            option.addEventListener('click', (e) => {
+                const size = e.target.dataset.size;
+                this.changeFontSize(size);
+                this.closeMenu();
+            });
+        });
+
+        // 保存されたフォントサイズを復元
+        this.loadSavedFontSize();
+    }
+
+    toggleMenu() {
+        this.menu.classList.toggle('show');
+    }
+
+    closeMenu() {
+        this.menu.classList.remove('show');
+    }
+
+    changeFontSize(size) {
+        // 既存のフォントサイズクラスを削除
+        document.body.classList.remove('font-small', 'font-medium', 'font-large');
+        
+        // 新しいフォントサイズクラスを追加
+        document.body.classList.add(`font-${size}`);
+        
+        // アクティブな選択肢を更新
+        this.options.forEach(option => {
+            option.classList.remove('active');
+            if (option.dataset.size === size) {
+                option.classList.add('active');
+            }
+        });
+
+        // 現在のサイズを保存
+        this.currentSize = size;
+        this.saveFontSize(size);
+
+        // トグルボタンのアイコンを更新
+        this.updateToggleIcon(size);
+    }
+
+    updateToggleIcon(size) {
+        const icons = {
+            small: 'A',
+            medium: 'A',
+            large: 'A'
+        };
+        this.toggle.textContent = icons[size];
+        
+        // サイズに応じてアイコンのスタイルも変更
+        const iconSizes = {
+            small: '16px',
+            medium: '20px',
+            large: '24px'
+        };
+        this.toggle.style.fontSize = iconSizes[size];
+    }
+
+    saveFontSize(size) {
+        // メモリに保存（localStorage使用不可のため）
+        window.currentFontSize = size;
+    }
+
+    loadSavedFontSize() {
+        // メモリから復元
+        const savedSize = window.currentFontSize || 'medium';
+        this.changeFontSize(savedSize);
+    }
+}
+
+
+
+
+
+
+
+// ページ読み込み後に初期化
+document.addEventListener('DOMContentLoaded', () => {
+    new FontSizeController();
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>

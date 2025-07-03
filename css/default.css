@@ -12,6 +12,26 @@
 }
 
 /* テーマの定義 */
+/* 画像の水色・ミントグリーンに合わせた新しいテーマ */
+.theme-aquamint {
+    --color-primary: #7DD3C0;      /* メインのミントグリーン */
+    --color-secondary: #ffffff;    /* 深い青緑（テキスト用） */
+    --color-tertiary: #4A9B8E;     /* 中間の青緑 */
+    --color-accent: #5FB3A1;       /* アクセントカラー */
+    --color-background: #E8F8F5;   /* 淡い水色の背景 */
+    --color-lighttext: #6B9B92;    /* ライトテキスト */
+    --color-text: #326563;         /* メインテキスト */
+    --color-border: #5FB3A1;       /* ボーダー */
+    --color-td: #D4F1EA;           /* テーブルセル */
+    --color-pattern: #7DD3C080;    /* パターン（透明度付き） */
+    --color-tabhover: #5FB3A1;     /* タブホバー */
+    --color-background2: #F5FCFA;  /* セカンダリ背景 */
+    --color-highlight: #FFFFFF;    /* ハイライト */
+    --color-selectionback: #7DD3C0; /* 選択背景 */
+    --color-selectiontext: #FFFFFF; /* 選択テキスト */
+}
+
+
 .theme-normal {
 	--color-primary: #F0C59E;
 	--color-secondary: #704B43;
@@ -19,11 +39,11 @@
 	--color-accent: #AB6F55;
 	--color-background: #d8ccc9;
 	--color-lighttext: #9e7a5b;
-	--color-text: #704B43;
+	--color-text: #74524a;
 	--color-border: #8b5e3c;
 	--color-td: #fae6d3;
 	--color-pattern: #F2BFAA80;
-	--color-tabhover: #39393980;  
+	--color-tabhover: #f0c69ea5;  
 	--color-background2: #FFFAF5;
 	--color-highlight: #FFFAF5;
 	--color-selectionback: #b9a497; 
@@ -49,6 +69,24 @@
 	--color-selectiontext: #ffffff; 
 }
 
+.theme-lightmono {
+	--color-primary: #414141;      /* 青緑色（メインの花の色） */
+	--color-secondary: #ffffff;    /* クリーム色（花びらの明るい部分） */
+	--color-tertiary: #5b5b5b;     /* 紫色（紫の花の色） */
+	--color-accent: #2d2d2d;       /* ダークティール（アクセント） */
+	--color-background: #ffffff;   /* 淡い青緑の背景 */
+	--color-lighttext: #5d5d5d;    /* ミディアムブルーグリーン */
+	--color-text: #444444;         /* ダークブルーグリーン */
+	--color-border: #383838;       /* ボーダー用の中間色 */
+	--color-td: #ffffff;           /* テーブルセル用の淡い色 */
+	--color-pattern: #6e6e6e80;    /* パターン用（透明度付き） */
+	--color-tabhover: #666666;  
+	--color-background2: #ffffff;  /* セカンダリ背景 */
+	--color-highlight: #ffffff;    /* ハイライト */
+	--color-selectionback: rgba(35, 35, 35, 0.5); /* 選択背景（紫色） */
+	--color-selectiontext: #ffffff; /* 選択テキスト */
+}
+
 /* 画像の花の色合いに合わせた新しいテーマ */
 .theme-floral {
 	--color-primary: #4A90A4;      /* 青緑色（メインの花の色） */
@@ -57,7 +95,7 @@
 	--color-accent: #2E7D8A;       /* ダークティール（アクセント） */
 	--color-background: #E8F4F8;   /* 淡い青緑の背景 */
 	--color-lighttext: #5A8A96;    /* ミディアムブルーグリーン */
-	--color-text: #2C4A52;         /* ダークブルーグリーン */
+	--color-text: #2a5561;         /* ダークブルーグリーン */
 	--color-border: #3E6B73;       /* ボーダー用の中間色 */
 	--color-td: #D6EBF0;           /* テーブルセル用の淡い色 */
 	--color-pattern: #4A90A480;    /* パターン用（透明度付き） */
@@ -70,17 +108,17 @@
 
 /* 月夜をイメージしたダークテーマ */
 .theme-moonlit {
-	--color-primary: #D4AF8C;      /* 月の暖かい光色 */
+	--color-primary: #E8B886;      /* 月の暖かい光色 */
 	--color-secondary: #2A2438;    /* 深い夜空の紫 */
-	--color-tertiary: #4A3C5A;     /* 雲の影の色 */
+	--color-tertiary: #9980b7;     /* 雲の影の色 */
 	--color-accent: #E8B886;       /* 秋の葉のオレンジ */
 	--color-background: #1C1826;   /* 深い夜空の背景 */
-	--color-lighttext: #9B8B7A;    /* 月光に照らされたテキスト */
+	--color-lighttext: #ceb59b8e;    /* 月光に照らされたテキスト */
 	--color-text: #E6D5C3;         /* クリーム色のメインテキスト */
 	--color-border: #3D3247;       /* ボーダー用の中間色 */
 	--color-td: #252033;           /* テーブルセル用の暗い色 */
 	--color-pattern: #D4AF8C40;    /* パターン用（月光の透明度） */
-	--color-tabhover: #d4af8c7a;   /* タブホバー */
+	--color-tabhover: #e8b986b0;   /* タブホバー */
 	--color-background2: #211D2F;  /* セカンダリ背景 */
 	--color-highlight: #2F2841;    /* ハイライト */
 	--color-selectionback: #4A3C5A; /* 選択背景 */
@@ -97,7 +135,7 @@
 
 
 
-a{
+a {
 	color: var(--color-tertiary);
 }
 
@@ -108,7 +146,6 @@ a{
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: brightness(0) invert(1); /* 白色にする場合 */
 	padding-top: 0%;
 }
 
@@ -117,11 +154,18 @@ a{
 	color: var(--color-selectiontext);
 }
 
+h1 {
+	font-family: semi;
+}
+
 body {
 	display: flex;
 	justify-content: center;
 	margin: 0;
+	background-image: none;
 	background-color: var(--color-background);
+	background-attachment: fixed;
+	background-size: cover;
 	font-family: main, sans-serif;
 	font-size: 16px; /* 基本フォントサイズを大きく */
 	position: relative;
@@ -159,7 +203,7 @@ body {
 }
 
 .container {
-	border: 1px solid var(--color-accent);
+	border: 2px solid var(--color-accent);
 	width: 100%;
 	background-color: var(--color-background2);
 	box-sizing: border-box;
@@ -169,7 +213,6 @@ body {
 
 .container-nb {
 	width: 100%;
-	border: 1px solid transparent;
 	background-color: var(--color-background2);
 }
 
@@ -179,11 +222,10 @@ table {
 }
 
 td {
-	border: 1px solid var(--color-accent);
 }
 
 td.header {
-	border: 1px solid var(--color-accent);
+	border: 2px solid var(--color-accent);
 	margin: 0px;
 	padding: 8px 4px; /* パディング調整 */
 }
@@ -233,6 +275,7 @@ td.header {
 	text-align: center;  
 	table-layout: fixed;
 	font-size: 0.95em;
+	user-select: none;
 }
 
 .header-tab {
@@ -342,7 +385,7 @@ p {
 
 hr {
 	border: none;
-	height: 0.5px;
+	height: 2px;
 	background-color: var(--color-border);
 	margin: 10px 0;
 }
@@ -362,6 +405,7 @@ hr {
 	color: var(--color-secondary);
 	font-family: semi;
 	font-weight: normal;
+	border: 2px solid var(--color-border);
 }
 
 h3 {
@@ -370,6 +414,10 @@ h3 {
 	z-index: 1;
 	font-family: semi;
 	font-weight: medium;
+}
+
+h2{
+	font-family: semi;
 }
 
 h4 {
@@ -383,6 +431,7 @@ h4 {
 td.scr {
 	color: var(--color-secondary);
 	background-color: var(--color-td);
+	border: 2px solid var(--color-border);
 }
 
 .top,
@@ -682,7 +731,7 @@ td.scr {
 	padding: 8px 12px;
 	background-color: var(--color-primary, #F0C59E);
 	color: var(--color-secondary, #704B43);
-	border: 1px solid var(--color-border, #8b5e3c);
+	border: 2px solid var(--color-border, #8b5e3c);
 	border-radius: 5px;
 	cursor: pointer;
 	text-align: center;
@@ -875,7 +924,7 @@ td.scr {
 
 .pagination button {
     padding: 8px 12px;
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
     background-color: var(--color-primary);
     color: var(--color-secondary);
     cursor: pointer;
@@ -968,4 +1017,9 @@ td.scr {
         width: 20px;
         height: 20px;
     }
+}
+
+
+#headerImage {
+  transition: opacity 0.5s ease-in-out;
 }

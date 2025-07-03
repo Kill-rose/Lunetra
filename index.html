@@ -19,7 +19,7 @@
 
 <!-- やばい！　ソースを見られたらカスみたいな書き方してるのバレちゃう！！！！ -->
 
-<body class="theme-floral"> <!-- テーマ（色） -->
+<body class="theme-aquamint"> <!-- テーマ（色） -->
 
 <div class="content-container"> <!-- 上の余白 -->
 
@@ -52,7 +52,6 @@
         <tr>
         <td class="header-tab selected header" data-tab="original-top">Top</td>
         <td class="header-tab header" data-tab="ss">SS</td>
-        <td class="header-tab header" data-tab="game">Game</td>
         <td class="header-tab header" data-tab="Ilust">Ilust</td>
         </tr>
     </table>     
@@ -227,7 +226,7 @@
 <div id="ss-content" class="tab-content" style="display: none;">
     <div class="container" style=" border-top: none;  text-align: center; justify-content: center;">
         <div class="cont-str-main" style="text-align: left;"><div class="top">
-            <h3>◆ ページ説明 ◆</h3>
+            <h3>◆ いんとろだくしょん ◆</h3>
             <p> SS・小説置き場。<br>
                 完結しているものがほとんどない。</p>
         </div></div>
@@ -272,14 +271,14 @@
                     全体長さ：3500字程度</p>
             </div>
         </div>
-        <div class="cont-maximg"  style="background-color: rgb(255, 255, 255);" ><img src="img/blackswan.png" class="fitted-image"></div>
+        <div class="cont-maximg"  style="background-color: rgba(255, 255, 255, 0);" ><img src="img/blackswan_1.png" class="fitted-image"></div>
 
     </div>
     <div class="container cont-double" style=" border-top: none;">
         <div class="cont-str">
             <table border="0" class="scratch-table container-nb">
                 <tr>
-                <td class="table-str" style="text-align: left; padding-left: 1vw;">MARRYED</td>
+                <td class="table-str" style="text-align: left; padding-left: 1vw;">MARRIED</td>
                 <td class="table-str scr" style="width: 10%; ">🌕️</td>
                 </tr>
             </table>      
@@ -311,7 +310,7 @@
     <div class="container" style=" border-top: none;  text-align: center; justify-content: center;">
         <div class="cont-str-main" style="text-align: left;">
             <div class="top">
-                <h3>◆ ページ説明 ◆</h3>
+                <h3>◆ いんとろだくしょん ◆</h3>
                 <p> イラスト置き場。<br>
                     落書き１０割。</p>
             </div>
@@ -395,7 +394,6 @@
                 <select id="sortSelect" style="padding: 8px; border: 1px solid var(--color-border); background-color: var(--color-background2); color: var(--color-text); font-family: semi;">
                     <option value="newest">新しい順</option>
                     <option value="oldest">古い順</option>
-                    <option value="title">タイトル順</option>
                 </select>
             </div>
             <div class="tag-filter" id="tagFilter" style="display: flex; gap: 5px; flex-wrap: wrap;">
@@ -464,10 +462,11 @@
 </div> <!-- page show 閉じ -->
 
 <script>
-// タブ管理システム
+// タブ管理システム（改良版）
 class TabManager {
     constructor() {
         this.currentMainTab = 'home';
+        this.currentSubTab = 'original-top';
         this.headerTitles = {
             'home': 'Welcome!',
             'blog': '- Hazukashigariya no Hitorigoto -',
@@ -478,10 +477,44 @@ class TabManager {
             'Ilust': '- Ilustrations -'
         };
         
+        // ヘッダー画像のパス
+        this.headerImages = {
+            'home': 'img/header/home.png',
+            'blog': 'img/header/flower.png',
+            'original': 'img/header/seed.png',
+            'ss': 'img/header/kesakike.png',
+            'game': 'img/header/seed.png',
+            'other': 'img/header/seed.png',
+            'Ilust': 'img/header/flower1.png'
+        };
+        // バックグラウンド画像のパス
+        this.backGrounds = {
+            'home': 'img/background/sky.png',
+            'blog': 'img/background/flower.png',
+            'original': 'img/background/seed.png',
+            'ss': 'img/kesakike.png',
+            'other': 'img/background/blue.png',
+            'game': 'img/background/blue.png',
+            'Ilust': 'img/background/flower1.png'
+        };
+        // テーマ
+        this.pageThemes = {
+            'home': 'theme-aquamint',
+            'blog': 'theme-floral',
+            'original': 'theme-lightmono',
+            'ss': 'theme-moonlit',
+            'game': 'theme-lightmono',
+            'other': 'theme-lightmono',
+            'Ilust': 'theme-normal'
+        };
+        
         this.init();
     }
 
     init() {
+        // URLハッシュからタブ情報を読み込み
+        this.loadTabFromHash();
+        
         // メインタブのクリックイベント
         document.querySelectorAll('.header-tab[data-tab="home"], .header-tab[data-tab="blog"], .header-tab[data-tab="original"]').forEach(tab => {
             tab.addEventListener('click', (e) => {
@@ -491,15 +524,71 @@ class TabManager {
         });
 
         // サブタブのクリックイベント
-        document.querySelectorAll('.header-tab[data-tab="original-top"], .header-tab[data-tab="ss"], .header-tab[data-tab="game"], .header-tab[data-tab="other"], .header-tab[data-tab="other"], .header-tab[data-tab="Ilust"]').forEach(tab => {
+        document.querySelectorAll('.header-tab[data-tab="original-top"], .header-tab[data-tab="ss"], .header-tab[data-tab="game"], .header-tab[data-tab="other"], .header-tab[data-tab="Ilust"]').forEach(tab => {
             tab.addEventListener('click', (e) => {
                 const tabName = e.target.dataset.tab;
                 this.switchSubTab(tabName);
             });
         });
 
+        // ブラウザの戻る/進むボタンに対応
+        window.addEventListener('popstate', (e) => {
+            this.loadTabFromHash();
+            this.updateDisplay();
+        });
+
         // 初期表示
         this.updateDisplay();
+    }
+
+    // URLハッシュからタブ情報を読み込み
+    loadTabFromHash() {
+        const hash = window.location.hash.substring(1); // '#'を除去
+        
+        if (!hash) {
+            // ハッシュがない場合はデフォルト
+            this.currentMainTab = 'home';
+            this.currentSubTab = 'original-top';
+            return;
+        }
+
+        // ハッシュの解析
+        const validSubTabs = ['original-top', 'ss', 'game', 'other', 'Ilust'];
+        const validMainTabs = ['home', 'blog', 'original'];
+
+        if (validSubTabs.includes(hash)) {
+            // サブタブが指定された場合
+            this.currentMainTab = 'original';
+            this.currentSubTab = hash;
+        } else if (validMainTabs.includes(hash)) {
+            // メインタブが指定された場合
+            this.currentMainTab = hash;
+            if (hash === 'original') {
+                this.currentSubTab = 'original-top';
+            }
+        } else {
+            // 不正なハッシュの場合はデフォルト
+            this.currentMainTab = 'home';
+            this.currentSubTab = 'original-top';
+        }
+    }
+
+    // URLハッシュを更新
+    updateHash() {
+        let hash = '';
+        
+        if (this.currentMainTab === 'home') {
+            hash = 'home';
+        } else if (this.currentMainTab === 'blog') {
+            hash = 'blog';
+        } else if (this.currentMainTab === 'original') {
+            hash = this.currentSubTab;
+        }
+        
+        // ハッシュを更新（履歴に追加）
+        if (window.location.hash !== '#' + hash) {
+            window.location.hash = hash;
+        }
     }
 
     switchMainTab(tabName) {
@@ -516,12 +605,14 @@ class TabManager {
             }
         }
         
+        this.updateHash();
         this.updateDisplay();
     }
 
     switchSubTab(tabName) {
         this.currentSubTab = tabName;
         this.currentMainTab = 'original'; // サブタブが選択されたらメインタブはOriginalに
+        this.updateHash();
         this.updateDisplay();
     }
 
@@ -552,6 +643,9 @@ class TabManager {
             }
         }
 
+        // ヘッダー画像の更新
+        this.updateHeaderImage();
+
         // メインタブの選択状態更新
         document.querySelectorAll('.header-tab[data-tab="home"], .header-tab[data-tab="blog"], .header-tab[data-tab="original"]').forEach(tab => {
             tab.classList.remove('selected');
@@ -568,8 +662,74 @@ class TabManager {
             }
         });
 
+        // サブタブの表示/非表示
+        if (this.currentMainTab === 'original') {
+            document.getElementById('sub-tabs').style.display = 'table';
+        } else {
+            document.getElementById('sub-tabs').style.display = 'none';
+        }
+
         // コンテンツの表示/非表示
         this.updateContent();
+    }
+
+    updateHeaderImage() { //どう考えてもヘッダー以外も変えてる
+        const headerImage = document.querySelector('.header-image img'); //ヘッダー画像要素取得
+        const themeBody = document.querySelector('body'); //body取得(背景画像もテーマもこれ) themeBodyってなに？　styleも変えてるよね？
+        if (!headerImage) return;
+
+        let imagePath;
+        let backPath;
+        let themeClass;
+        
+        if (this.currentMainTab === 'home') {
+            imagePath = this.headerImages['home'];
+            backPath = this.backGrounds['home'];
+            themeClass = this.pageThemes['home'];
+        } else if (this.currentMainTab === 'blog') {
+            imagePath = this.headerImages['blog'];
+            backPath = this.backGrounds['blog'];
+            themeClass = this.pageThemes['blog'];
+        } else {
+            // サブタブに応じて画像を変更
+            switch (this.currentSubTab) {
+                case 'ss':
+                    imagePath = this.headerImages['ss'];
+                    themeClass = this.pageThemes['ss'];
+                    backPath = this.backGrounds['ss'];
+                    break;
+                case 'game':
+                    imagePath = this.headerImages['game'];
+                    themeClass = this.pageThemes['game'];
+                    backPath = this.backGrounds['game'];
+                    break;
+                case 'Ilust':
+                    imagePath = this.headerImages['Ilust']; //よく見たらこれだけ大文字　置換の影響やな？
+                    themeClass = this.pageThemes['Ilust'];
+                    backPath = this.backGrounds['Ilust'];
+                    break;
+                case 'other':
+                    imagePath = this.headerImages['other'];
+                    themeClass = this.pageThemes['other'];
+                    backPath = this.backGrounds['other'];
+                    break;
+                default:
+                    imagePath = this.headerImages['original'];
+                    themeClass = this.pageThemes['original'];
+                    backPath = this.backGrounds['original'];
+            }
+        }
+
+        
+        headerImage.src = imagePath;
+        themeBody.style.backgroundImage = `url("${backPath}")`;
+        // テーマクラス削除
+        themeBody.classList.remove('theme-aquamint', 'theme-normal', 'theme-mono', 'theme-floral', 'theme-moonlit','theme-lightmono');
+        // テーマクラス追加
+        themeBody.classList.add(themeClass);
+
+        
+
     }
 
     updateContent() {
@@ -608,8 +768,19 @@ class TabManager {
             targetContent.style.display = 'block';
         }
     }
-}
 
+    // 外部からタブを指定して開くためのメソッド
+    openTab(tabName) {
+        const validSubTabs = ['original-top', 'ss', 'game', 'other', 'Ilust'];
+        const validMainTabs = ['home', 'blog', 'original'];
+
+        if (validSubTabs.includes(tabName)) {
+            this.switchSubTab(tabName);
+        } else if (validMainTabs.includes(tabName)) {
+            this.switchMainTab(tabName);
+        }
+    }
+}
 // フォントサイズ変更機能
 class FontSizeController {
     constructor() {
@@ -707,10 +878,479 @@ class FontSizeController {
         this.changeFontSize(savedSize);
     }
 }
+// ブログ機能のJavaScript（改良版）
+class BlogManager {
+    constructor() {
+        this.articles = [
+            {
+                id: 1,
+                title: "Vtuberさばるちゃん爆誕",
+                filename: "vtube.html",
+                date: "2025-05-06",
+                genre: "なんか作った",
+                tags: ["Vtuberさばるちゃん"],
+                summary: "Live2Dでいろいろやって配信準備までした。昔の記事の残骸（サンプル）なので中身なし。"
+            },
+            {
+                id: 2,
+                title: "Lunetra Ver2",
+                filename: "lune_ver2.html",
+                date: "2025-07-02",
+                genre: "サイト更新",
+                tags: ["更新情報","お知らせ"],
+                summary: "サイトををGitHubに移行したり大幅にリニューアルしたり。"
+            }
+        ];
+        
+        this.currentPage = 1;
+        this.articlesPerPage = 5;
+        this.currentGenre = 'all';
+        this.selectedTags = [];
+        this.currentSort = 'newest';
+        this.searchQuery = '';
+        this.filteredArticles = [...this.articles];
+        
+        this.init();
+    }
 
+    init() {
+        // 検索機能
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.searchQuery = e.target.value.toLowerCase();
+                this.filterAndSort();
+            });
+        }
+
+        // ソート機能
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', (e) => {
+                this.currentSort = e.target.value;
+                this.filterAndSort();
+            });
+        }
+
+        // 初期表示
+        this.generateFilters();
+        this.filterAndSort();
+    }
+
+    generateFilters() {
+        const tagFilter = document.getElementById('tagFilter');
+        if (!tagFilter) return;
+
+        // 全ジャンルを収集
+        const allGenres = [...new Set(this.articles.map(article => article.genre))];
+        
+        // 全タグを収集
+        const allTags = [...new Set(this.articles.flatMap(article => article.tags))];
+        
+        // フィルターコンテナを作成
+        tagFilter.innerHTML = '';
+        
+        // ジャンルフィルター
+        const genreContainer = document.createElement('div');
+        genreContainer.style.marginBottom = '15px';
+        
+        const genreLabel = document.createElement('div');
+        genreLabel.textContent = 'ジャンル:';
+        genreLabel.style.cssText = `
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--color-text);
+            font-family: semi;
+        `;
+        genreContainer.appendChild(genreLabel);
+        
+        const genreButtons = document.createElement('div');
+        genreButtons.style.cssText = 'display: flex; gap: 5px; flex-wrap: wrap;';
+        
+        // 「すべて」ボタン
+        const allGenreButton = this.createFilterButton('すべて', true);
+        allGenreButton.addEventListener('click', () => {
+            this.setGenreFilter('all');
+        });
+        genreButtons.appendChild(allGenreButton);
+        
+        // 各ジャンルのボタン
+        allGenres.forEach(genre => {
+            const button = this.createFilterButton(genre, false);
+            button.addEventListener('click', () => {
+                this.setGenreFilter(genre);
+            });
+            genreButtons.appendChild(button);
+        });
+        
+        genreContainer.appendChild(genreButtons);
+        tagFilter.appendChild(genreContainer);
+        
+        // タグフィルター
+        const tagContainer = document.createElement('div');
+        
+        const tagLabel = document.createElement('div');
+        tagLabel.textContent = 'タグ（複数選択可）:';
+        tagLabel.style.cssText = `
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--color-text);
+            font-family: semi;
+        `;
+        tagContainer.appendChild(tagLabel);
+        
+        const tagButtons = document.createElement('div');
+        tagButtons.style.cssText = 'display: flex; gap: 5px; flex-wrap: wrap;';
+        
+        // 各タグのボタン
+        allTags.forEach(tag => {
+            const button = this.createFilterButton(tag, false);
+            button.addEventListener('click', () => {
+                this.toggleTagFilter(tag, button);
+            });
+            tagButtons.appendChild(button);
+        });
+        
+        tagContainer.appendChild(tagButtons);
+        tagFilter.appendChild(tagContainer);
+        
+        // 選択中のタグ表示エリア
+        const selectedTagsContainer = document.createElement('div');
+        selectedTagsContainer.id = 'selectedTags';
+        selectedTagsContainer.style.cssText = 'margin-top: 10px;';
+        tagFilter.appendChild(selectedTagsContainer);
+    }
+
+    createFilterButton(text, isActive) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.className = isActive ? 'filter-button active' : 'filter-button';
+        button.style.cssText = `
+            padding: 6px 12px;
+            margin: 2px;
+            border: 1px solid var(--color-border);
+            background-color: ${isActive ? 'var(--color-primary)' : 'var(--color-background2)'};
+            color: ${isActive ? 'white' : 'var(--color-text)'};
+            cursor: pointer;
+            border-radius: 4px;
+            font-family: semi;
+            font-size: 13px;
+            transition: all 0.2s;
+        `;
+        
+        button.addEventListener('mouseenter', () => {
+            if (!button.classList.contains('active')) {
+                button.style.backgroundColor = 'var(--color-tabhover)';
+                button.style.color = 'white';
+            }
+        });
+        
+        button.addEventListener('mouseleave', () => {
+            if (!button.classList.contains('active')) {
+                button.style.backgroundColor = 'var(--color-background2)';
+                button.style.color = 'var(--color-text)';
+            }
+        });
+        
+        return button;
+    }
+
+    setGenreFilter(genre) {
+        this.currentGenre = genre;
+        this.currentPage = 1;
+        
+        // ジャンルボタンの見た目を更新
+        const genreButtons = document.querySelectorAll('.filter-button');
+        genreButtons.forEach(button => {
+            const isGenreButton = button.textContent === 'すべて' || 
+                this.articles.some(article => article.genre === button.textContent);
+            
+            if (isGenreButton) {
+                const isActive = (genre === 'all' && button.textContent === 'すべて') || 
+                    (genre !== 'all' && button.textContent === genre);
+                
+                button.classList.toggle('active', isActive);
+                button.style.backgroundColor = isActive ? 'var(--color-primary)' : 'var(--color-background2)';
+                button.style.color = isActive ? 'white' : 'var(--color-text)';
+            }
+        });
+        
+        this.filterAndSort();
+    }
+
+    toggleTagFilter(tag, button) {
+        const index = this.selectedTags.indexOf(tag);
+        if (index > -1) {
+            this.selectedTags.splice(index, 1);
+            button.classList.remove('active');
+            button.style.backgroundColor = 'var(--color-background2)';
+            button.style.color = 'var(--color-text)';
+        } else {
+            this.selectedTags.push(tag);
+            button.classList.add('active');
+            button.style.backgroundColor = 'var(--color-primary)';
+            button.style.color = 'white';
+        }
+        
+        this.currentPage = 1;
+        this.updateSelectedTagsDisplay();
+        this.filterAndSort();
+    }
+
+    updateSelectedTagsDisplay() {
+        const selectedTagsContainer = document.getElementById('selectedTags');
+        if (!selectedTagsContainer) return;
+        
+        if (this.selectedTags.length === 0) {
+            selectedTagsContainer.innerHTML = '';
+            return;
+        }
+        
+        selectedTagsContainer.innerHTML = `
+            <div style="font-size: 12px; color: var(--color-text); margin-bottom: 5px;">
+                選択中のタグ: ${this.selectedTags.join(', ')}
+                <button onclick="blogManager.clearTags()" style="
+                    margin-left: 10px;
+                    padding: 2px 6px;
+                    font-size: 11px;
+                    background-color: var(--color-secondary);
+                    color: var(--color-text);
+                    border: 1px solid var(--color-border);
+                    border-radius: 3px;
+                    cursor: pointer;
+                    font-family: main;
+                ">クリア</button>
+            </div>
+        `;
+    }
+
+    clearTags() {
+        this.selectedTags = [];
+        
+        // タグボタンの見た目をリセット
+        const tagButtons = document.querySelectorAll('.filter-button');
+        tagButtons.forEach(button => {
+            const isTagButton = !button.textContent.includes('すべて') && 
+                !this.articles.some(article => article.genre === button.textContent);
+            
+            if (isTagButton) {
+                button.classList.remove('active');
+                button.style.backgroundColor = 'var(--color-background2)';
+                button.style.color = 'var(--color-text)';
+            }
+        });
+        
+        this.updateSelectedTagsDisplay();
+        this.filterAndSort();
+    }
+
+    filterAndSort() {
+        // フィルタリング
+        this.filteredArticles = this.articles.filter(article => {
+            const matchesSearch = this.searchQuery === '' || 
+                article.title.toLowerCase().includes(this.searchQuery) ||
+                article.summary.toLowerCase().includes(this.searchQuery);
+            
+            const matchesGenre = this.currentGenre === 'all' || 
+                article.genre === this.currentGenre;
+            
+            const matchesTags = this.selectedTags.length === 0 || 
+                this.selectedTags.every(tag => article.tags.includes(tag));
+            
+            return matchesSearch && matchesGenre && matchesTags;
+        });
+
+        // ソート
+        this.filteredArticles.sort((a, b) => {
+            if (this.currentSort === 'newest') {
+                return new Date(b.date) - new Date(a.date);
+            } else {
+                return new Date(a.date) - new Date(b.date);
+            }
+        });
+
+        this.renderArticles();
+        this.renderPagination();
+    }
+
+    renderArticles() {
+        const articleList = document.getElementById('articleList');
+        if (!articleList) return;
+
+        articleList.innerHTML = '';
+
+        const startIndex = (this.currentPage - 1) * this.articlesPerPage;
+        const endIndex = startIndex + this.articlesPerPage;
+        const pageArticles = this.filteredArticles.slice(startIndex, endIndex);
+
+        if (pageArticles.length === 0) {
+            articleList.innerHTML = `
+                <div class="container" style="border-top: none;">
+                    <div class="cont-str-main" style="text-align: center;">
+                        <p>該当する記事が見つかりませんでした。</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        pageArticles.forEach(article => {
+            const articleElement = document.createElement('div');
+            articleElement.className = 'container';
+            articleElement.style.cssText = 'border-top: none;';
+            
+            articleElement.innerHTML = `
+                <div class="cont-str-main">
+                    <h4 style="
+                        margin: 0 0 10px 0;
+                        padding: 0;
+                        color: var(--color-text);
+                        font-family: semi;
+                        cursor: pointer;
+                        transition: color 0.2s;
+                    " class="article-title" data-filename="${article.filename}">
+                        ${article.title}
+                    </h4>
+                    <div style="
+                        font-size: 13px;
+                        color: var(--color-lighttext);
+                        margin-bottom: 10px;
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                    ">
+                        <span>${article.date}</span>
+                        <span style="
+                            background-color: var(--color-primary);
+                            color: white;
+                            padding: 2px 8px;
+                            border-radius: 3px;
+                            font-size: 12px;
+                        ">${article.genre}</span>
+                    </div>
+                    <p style="
+                        margin: 0 0 10px 0;
+                        line-height: 1.6;
+                        color: var(--color-text);
+                    ">${article.summary}</p>
+                    <div style="margin-top: 10px;">
+                        ${article.tags.map(tag => `
+                            <span style="
+                                background-color: var(--color-background2);
+                                color: var(--color-text);
+                                padding: 2px 6px;
+                                border-radius: 3px;
+                                font-size: 11px;
+                                margin-right: 5px;
+                                border: 1px solid var(--color-border);
+                            ">${tag}</span>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // 記事タイトルのクリックイベント
+            const titleElement = articleElement.querySelector('.article-title');
+            titleElement.addEventListener('click', () => {
+                window.open(`blog/${article.filename}`, '_self');
+            });
+            
+            titleElement.addEventListener('mouseenter', () => {
+                titleElement.style.color = 'var(--color-primary)';
+            });
+            
+            titleElement.addEventListener('mouseleave', () => {
+                titleElement.style.color = 'var(--color-text)';
+            });
+            
+            articleList.appendChild(articleElement);
+        });
+    }
+
+    renderPagination() {
+        const pagination = document.getElementById('pagination');
+        if (!pagination) return;
+
+        const totalPages = Math.ceil(this.filteredArticles.length / this.articlesPerPage);
+        
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '';
+        
+        // 前へボタン
+        if (this.currentPage > 1) {
+            paginationHTML += `<button class="page-btn" data-page="${this.currentPage - 1}">← 前</button>`;
+        }
+        
+        // ページ番号
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === this.currentPage) {
+                paginationHTML += `<button class="page-btn active" data-page="${i}">${i}</button>`;
+            } else {
+                paginationHTML += `<button class="page-btn" data-page="${i}">${i}</button>`;
+            }
+        }
+        
+        // 次へボタン
+        if (this.currentPage < totalPages) {
+            paginationHTML += `<button class="page-btn" data-page="${this.currentPage + 1}">次 →</button>`;
+        }
+        
+        pagination.innerHTML = paginationHTML;
+        
+        // ページネーションボタンのスタイル設定
+        this.addPaginationStyles();
+        
+        // クリックイベント
+        pagination.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const page = parseInt(e.target.dataset.page);
+                this.currentPage = page;
+                this.renderArticles();
+                this.renderPagination();
+            });
+        });
+    }
+
+    addPaginationStyles() {
+        if (!document.getElementById('pagination-style')) {
+            const style = document.createElement('style');
+            style.id = 'pagination-style';
+            style.textContent = `
+                .page-btn {
+                    padding: 8px 12px;
+                    margin: 0 2px;
+                    border: 1px solid var(--color-border);
+                    background-color: var(--color-background2);
+                    color: var(--color-text);
+                    cursor: pointer;
+                    border-radius: 4px;
+                    font-family: semi;
+                    transition: all 0.2s;
+                }
+                .page-btn:hover {
+                    background-color: var(--color-tabhover);
+                    color: white;
+                }
+                .page-btn.active {
+                    background-color: var(--color-primary);
+                    color: white;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+}
+
+// グローバル変数として設定（clearTags関数をHTMLから呼び出すため）
+let blogManager;
 
 // ページ読み込み後に初期化
 document.addEventListener('DOMContentLoaded', () => {
+    new BlogManager();
     new TabManager();
     new FontSizeController();
 });
