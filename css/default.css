@@ -12,23 +12,22 @@
 }
 
 /* テーマの定義 */
-/* 画像の水色・ミントグリーンに合わせた新しいテーマ */
 .theme-aquamint {
-    --color-primary: #7DD3C0;      /* メインのミントグリーン */
-    --color-secondary: #ffffff;    /* 深い青緑（テキスト用） */
-    --color-tertiary: #4A9B8E;     /* 中間の青緑 */
-    --color-accent: #5FB3A1;       /* アクセントカラー */
-    --color-background: #E8F8F5;   /* 淡い水色の背景 */
-    --color-lighttext: #6B9B92;    /* ライトテキスト */
-    --color-text: #326563;         /* メインテキスト */
-    --color-border: #5FB3A1;       /* ボーダー */
-    --color-td: #D4F1EA;           /* テーブルセル */
-    --color-pattern: #7DD3C080;    /* パターン（透明度付き） */
-    --color-tabhover: #5FB3A1;     /* タブホバー */
-    --color-background2: #F5FCFA;  /* セカンダリ背景 */
-    --color-highlight: #FFFFFF;    /* ハイライト */
-    --color-selectionback: #7DD3C0; /* 選択背景 */
-    --color-selectiontext: #FFFFFF; /* 選択テキスト */
+    --color-primary: #7DD3C0;   
+    --color-secondary: #ffffff;  
+    --color-tertiary: #4A9B8E;   
+    --color-accent: #5FB3A1;     
+    --color-background: #E8F8F5;  
+    --color-lighttext: #6B9B92;    
+    --color-text: #326563;       
+    --color-border: #5FB3A1;   
+    --color-td: #D4F1EA;        
+    --color-pattern: #7DD3C080;  
+    --color-tabhover: #5FB3A1;   
+    --color-background2: #F5FCFA; 
+    --color-highlight: #FFFFFF;   
+    --color-selectionback: #7DD3C0; 
+    --color-selectiontext: #FFFFFF;
 }
 
 
@@ -70,21 +69,21 @@
 }
 
 .theme-lightmono {
-	--color-primary: #414141;      /* 青緑色（メインの花の色） */
-	--color-secondary: #ffffff;    /* クリーム色（花びらの明るい部分） */
-	--color-tertiary: #5b5b5b;     /* 紫色（紫の花の色） */
-	--color-accent: #2d2d2d;       /* ダークティール（アクセント） */
-	--color-background: #ffffff;   /* 淡い青緑の背景 */
-	--color-lighttext: #5d5d5d;    /* ミディアムブルーグリーン */
-	--color-text: #444444;         /* ダークブルーグリーン */
-	--color-border: #383838;       /* ボーダー用の中間色 */
-	--color-td: #ffffff;           /* テーブルセル用の淡い色 */
-	--color-pattern: #6e6e6e80;    /* パターン用（透明度付き） */
+	--color-primary: #414141;     
+	--color-secondary: #ffffff;    
+	--color-tertiary: #5b5b5b;    
+	--color-accent: #2d2d2d;    
+	--color-background: #ffffff; 
+	--color-lighttext: #5d5d5d;   
+	--color-text: #444444;        
+	--color-border: #383838;     
+	--color-td: #ffffff;          
+	--color-pattern: #6e6e6e80;   
 	--color-tabhover: #666666;  
-	--color-background2: #ffffff;  /* セカンダリ背景 */
-	--color-highlight: #ffffff;    /* ハイライト */
-	--color-selectionback: rgba(35, 35, 35, 0.5); /* 選択背景（紫色） */
-	--color-selectiontext: #ffffff; /* 選択テキスト */
+	--color-background2: #ffffff;  
+	--color-highlight: #ffffff;    
+	--color-selectionback: #3838387a;
+	--color-selectiontext: #ffffff; 
 }
 
 /* 画像の花の色合いに合わせた新しいテーマ */
