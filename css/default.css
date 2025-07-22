@@ -202,7 +202,7 @@ body {
 }
 
 .container {
-	border: 2px solid var(--color-accent);
+	border: 1px solid var(--color-accent);
 	width: 100%;
 	background-color: var(--color-background2);
 	box-sizing: border-box;
@@ -222,7 +222,7 @@ table {
 
 
 td.header {
-	border: 2px solid var(--color-accent);
+	border: 1px solid var(--color-accent);
 	margin: 0px;
 	padding: 8px 4px; /* パディング調整 */
 }
@@ -382,7 +382,7 @@ p {
 
 hr {
 	border: none;
-	height: 2px;
+	height: 1px;
 	background-color: var(--color-border);
 	margin: 10px 0;
 }
@@ -402,7 +402,7 @@ hr {
 	color: var(--color-secondary);
 	font-family: semi;
 	font-weight: normal;
-	border: 2px solid var(--color-border);
+	border: 1px solid var(--color-border);
 }
 
 h3 {
@@ -428,7 +428,7 @@ h4 {
 td.scr {
 	color: var(--color-secondary);
 	background-color: var(--color-td);
-	border: 2px solid var(--color-border);
+	border: 1px solid var(--color-border);
 }
 
 .top,
@@ -489,11 +489,11 @@ td.scr {
 	}
 	
 	td.header {
-		padding: 12px 8px;
+		padding: 11px 8px;
 	}
 	
 	.header-tab-cover {
-		padding: 12px 0;
+		padding: 11px 0;
 		font-size: 1em;
 	}
 	
@@ -542,7 +542,7 @@ td.scr {
 
 .loading-container {
 	background-color: var(--color-background2);
-	border: 2px solid var(--color-accent);
+	border: 1px solid var(--color-accent);
 	padding: 25px;
 	width: 80%;
 	max-width: 400px;
@@ -626,7 +626,7 @@ td.scr {
 	width: 50px;
 	height: 50px;
 	background-color: var(--color-accent, #AB6F55);
-	border: 2px solid var(--color-border, #8b5e3c);
+	border: 1px solid var(--color-border, #8b5e3c);
 	border-radius: 50%;
 	cursor: pointer;
 	display: flex;
@@ -634,7 +634,7 @@ td.scr {
 	justify-content: center;
 	font-size: 20px;
 	color: var(--color-secondary, #ffffff);
-	box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+	box-shadow: 0 1px 10px rgba(0,0,0,0.3);
 	transition: all 0.3s ease;
 	z-index: 100;
 	user-select: none;
@@ -652,7 +652,7 @@ td.scr {
 	bottom: 80px;
 	right: 20px;
 	background-color: var(--color-background2, #FFFAF5);
-	border: 2px solid var(--color-accent, #AB6F55);
+	border: 1px solid var(--color-accent, #AB6F55);
 	border-radius: 10px;
 	padding: 15px;
 	box-shadow: 0 4px 20px rgba(0,0,0,0.3);
@@ -687,10 +687,10 @@ td.scr {
 }
 
 .font-size-option {
-	padding: 8px 12px;
+	padding: 8px 11px;
 	background-color: var(--color-primary, #F0C59E);
 	color: var(--color-secondary, #704B43);
-	border: 2px solid var(--color-border, #8b5e3c);
+	border: 1px solid var(--color-border, #8b5e3c);
 	border-radius: 5px;
 	cursor: pointer;
 	text-align: center;
@@ -700,7 +700,7 @@ td.scr {
 
 .font-size-option:hover {
 	background-color: var(--color-tertiary, #B89677);
-	transform: translateX(2px);
+	transform: translateX(1px);
 }
 
 .font-size-option.active {
@@ -746,7 +746,7 @@ td.scr {
 .modal-content {
     background-color: var(--color-background2);
     margin: 5% auto;
-    border: 2px solid var(--color-accent);
+    border: 1px solid var(--color-accent);
     width: 90%;
     max-width: 800px;
     max-height: 80vh;
@@ -805,7 +805,7 @@ td.scr {
     background-color: var(--color-primary);
     color: var(--color-secondary);
     padding: 4px 8px;
-    margin: 2px;
+    margin: 1px;
     border-radius: 3px;
     font-size: 0.8em;
     cursor: pointer;
@@ -866,8 +866,8 @@ td.scr {
 }
 
 .pagination button {
-    padding: 8px 12px;
-    border: 2px solid var(--color-border);
+    padding: 8px 11px;
+    border: 1px solid var(--color-border);
     background-color: var(--color-primary);
     color: var(--color-secondary);
     cursor: pointer;
@@ -920,7 +920,7 @@ td.scr {
     width: 50px;
     height: 50px;
     background-color: var(--color-accent, #AB6F55);
-    border: 2px solid var(--color-border, #8b5e3c);
+    border: 1px solid var(--color-border, #8b5e3c);
     border-radius: 50%;
     cursor: pointer;
     display: flex;
@@ -946,6 +946,9 @@ td.scr {
     transition: transform 0.2s ease;
 }
 
+#headerImage {
+  transition: opacity 0.5s ease-in-out;
+}
 
 /* スマホ対応 */
 @media screen and (max-width: 767px) {
@@ -964,7 +967,7 @@ td.scr {
 		bottom: 70px;
 		right: 15px;
 		min-width: 130px;
-		padding: 12px;
+		padding: 11px;
 	}
 
 
@@ -985,7 +988,7 @@ td.scr {
 
 
 	.font-size-toggle {
-		border: 2px solid var(--color-border, #8b5e3c);
+		border: 1px solid var(--color-border, #8b5e3c);
 	}
 
 	.font-size-menu {
@@ -1068,6 +1071,3 @@ td.scr {
 
 
 
-#headerImage {
-  transition: opacity 0.5s ease-in-out;
-}
